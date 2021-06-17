@@ -1,0 +1,163 @@
+# Hanoyua
+1
+#include "stdafx.h"
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+void showTower(vector <int> tower)
+{
+for (int i = 0; i < tower.size(); i++)
+{
+cout « tower[i] « " ";
+}
+
+cout « endl
+}
+
+
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+setlocale(LC_ALL, "rus");
+
+const int N = 2;
+
+vector <int> tower0;
+vector <int> tower1;
+vector <int> tower2;
+
+tower0.push_back(100);
+tower1.push_back(100);
+tower2.push_back(100);
+
+for (int i = N; i >= 1; i--)
+{
+tower0.push_back(i);
+}
+
+
+
+int sour = 0;
+int dest = 0;
+
+int disk0 = 0;
+int disk1 = 0;
+
+while(true)
+{
+showTower(tower0);
+showTower(tower1);
+showTower(tower2);
+
+cout « "Откуда ";
+cin » sour;
+cout « "Куда ";
+cin » dest;
+
+if (sour == 0 && dest == 1)
+{
+disk0 = tower0[tower0.size()-1];
+disk1 = tower1[tower1.size()-1];
+
+if (disk0 < disk1)
+{
+tower0.pop_back();
+tower1.push_back(disk0);
+}
+else
+{
+cout « "Ошибка!" « endl;
+}
+}
+
+
+if (sour == 0 && dest == 2)
+{
+disk0 = tower0[tower0.size()-1];
+disk1 = tower2[tower2.size()-1];
+
+if (disk0 < disk1)
+{
+tower0.pop_back();
+tower2.push_back(disk0);
+}
+else
+{
+cout « "Ошибка!" « endl;
+}
+}
+if (sour == 1 && dest == 0)
+{
+disk0 = tower1[tower1.size()-1];
+disk1 = tower0[tower0.size()-1];
+
+if (disk0 < disk1)
+{
+tower1.pop_back();
+tower0.push_back(disk0);
+}
+else
+{
+cout « "Ошибка!" « endl;
+}
+}
+if (sour == 1 && dest == 2)
+{
+disk0 = tower1[tower1.size()-1];
+disk1 = tower2[tower2.size()-1];
+
+if (disk0 < disk1)
+{
+tower1.pop_back();
+tower2.push_back(disk0);
+}
+else
+{
+cout « "Ошибка!" « endl;
+}
+}
+if (sour == 2 && dest == 0)
+{
+disk0 = tower2[tower2.size()-1];
+disk1 = tower0[tower0.size()-1];
+
+if (disk0 < disk1)
+{
+tower2.pop_back();
+tower0.push_back(disk0);
+}
+else
+{
+cout « "Ошибка!" « endl;
+}
+}
+if (sour == 2 && dest == 1)
+{
+disk0 = tower2[tower2.size()-1];
+disk1 = tower1[tower1.size()-1];
+
+if (disk0 < disk1)
+{
+tower2.pop_back();
+tower1.push_back(disk0);
+}
+else
+{
+cout « "Ошибка!" « endl;
+}
+
+if (tower1.size() == N+1 || tower2.size() == N+1)
+{
+cout « "Победа!" « endl;
+break;
+}
+}
+
+
+system("pause");
+
+return 0;
+}
+}
